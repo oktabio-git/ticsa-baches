@@ -1,0 +1,36 @@
+$bgColor: #ffa12d;
+$width: 100%;
+$height: 10rem;
+$flex: flex;
+
+@mixin maquetado($width, $height, $maquetado, $direction) {
+  width: $width;
+  height: $height;
+  display: $maquetado;
+  flex-direction: $direction;
+}
+
+/* Titulo de galeria de fotos icono y h2 */
+.wrapper-icon-text {
+  @include maquetado($width, auto, flex, row);
+  align-items: center;
+  color: #fff;
+
+  h2 {
+    font-weight: normal;
+    margin-bottom: 1rem;
+  }
+
+  .galeria-title {
+    margin-left: 1rem;
+  }
+
+  .foto {
+    font-size: 1.5rem;
+  }
+}
+
+.google-map {
+  width: 100%;
+  height: 100%
+}

@@ -1,0 +1,268 @@
+$colorBlanco: #fff;
+$base_text: #969696;
+
+/* Classes flex */
+%flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+%flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin ItemContent($items, $content) {
+  align-items: $items;
+  justify-content: $content;
+}
+
+@mixin backgroundHW($background, $height, $width) {
+  background: $background;
+  height: $height;
+  width: $width;
+}
+
+.wrapper-home {
+  grid-column: 2 / 3;
+  @extend %flexColumn;
+  padding: 1rem;
+
+  .graphics {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .content {
+      height: auto;
+      width: 20rem;
+      position: relative;
+    }
+  }
+}
+
+.info-container {
+  width: 100%;
+  @extend %flexRow;
+  @include ItemContent(center, space-between);
+  color: $colorBlanco;
+
+  /* button de buscar */
+  .form-group {
+    display: flex;
+    align-items: center;
+
+    label {
+      margin-bottom: 15px;
+      position: relative;
+      color: $base_text;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 0px;
+      margin-top: 20px;
+      border: none;
+      outline: none;
+      background-color: #262626;
+      border-bottom: 2px solid $base_text;
+      color: white;
+    }
+
+    input::placeholder {
+      opacity: 0;
+    }
+
+    span {
+      position: absolute;
+      top: 2rem;
+      left: 0;
+      transform: translateY(0px);
+      font-size: 0.825em;
+      transition-duration: 300ms;
+      font-size: 1rem;
+    }
+
+    label:focus-within>span,
+    input:not(:placeholder-shown)+span {
+      transform: translateY(-25px);
+      color: #fff;
+    }
+  }
+
+  /* Icono y titulo del header */
+  .graphi-title {
+    margin-left: 1rem;
+    @include ItemContent(center, none);
+
+    /* Modifica el icono gráfica del titulo*/
+    .graphi {
+      font-size: 1.5rem;
+      color: $colorBlanco;
+      margin-right: 1rem;
+    }
+
+    h2 {
+      font-weight: normal;
+    }
+  }
+}
+
+/* Navbar de la pagina home*/
+.total-zona {
+  display: flex;
+  @include ItemContent(center, none);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+
+  .link {
+    margin-left: 1rem;
+    height: 2rem;
+  }
+
+  .line-button:hover {
+    border-bottom: 3px solid#ffa12d;
+  }
+}
+
+/* car title debajo de la graficas */
+.car-title {
+  margin-left: 1rem;
+  @extend %flexRow;
+  align-items: flex-start;
+
+  div {
+    @include ItemContent(center, none);
+    color: $colorBlanco;
+
+    h2 {
+      font-weight: normal;
+    }
+  }
+}
+
+/* Contendor del titulo fecha y bottom esta arriba del mapa */
+.title-button {
+  width: 100%;
+  @extend %flexRow;
+  @include ItemContent(flex-start, space-between);
+  margin-bottom: 1rem;
+
+  .btn-mas-recorrido {
+    color: #262626;
+    background: #ffa12d;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 4px;
+
+    &:hover {
+      background: #fdb052;
+    }
+  }
+}
+
+/* Video y mapa de los recorridos  */
+.video-mapa {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.container-mapa-video {
+  @include maquetado(100%, 100%, flex, row-reverse);
+  justify-content: space-between;
+  margin: 0 1rem;
+
+  .description {
+    @include maquetado($width, 100%, flex, column);
+    margin-left: 1rem;
+    height: 36rem;
+    overflow: auto;
+
+    .container-description {
+      @include maquetado($width, auto, flex, row);
+    }
+
+    .data-video {
+      @include maquetado($width, auto, flex, row);
+      justify-content: space-between;
+      flex-wrap: 3;
+      padding-right: 2rem;
+      padding-bottom: 2rem;
+
+      &:hover {
+        background: #0e0d0b94;
+
+        .ver-detalles {
+          display: block;
+        }
+      }
+    }
+
+    .data-ciudad {
+      padding: 2rem;
+
+      .circle-text {
+        color: $colorBlanco;
+
+        p,
+        h3 {
+          color: #dfc327;
+          padding: 0;
+          margin-bottom: .25rem;
+        }
+
+        .date {
+          font-size: 14px;
+          margin-bottom: .5rem;
+        }
+      }
+
+      .data-list {
+        @extend %flexColumn;
+        border: 2px solid $colorBlanco;
+        border-top: none;
+        border-right: none;
+        border-bottom: none;
+        padding: 1rem 2rem;
+        @include ItemContent(flex-start, none);
+        opacity: 0.5;
+      }
+
+      .data-button {
+        button {
+          color: #262626;
+          background: #ffa12d;
+          font-size: 0.9rem;
+          padding: 0.5rem 0.75rem;
+          border: none;
+          border-radius: 4px;
+
+          &:hover {
+            background: #fdb052;
+          }
+        }
+      }
+    }
+
+    .ver-mas {
+      .header-ver {
+        @include maquetado($width, auto, flex, row);
+        align-items: center;
+        justify-content: center;
+        
+        color: #ffa12d;
+        cursor: pointer;
+
+        .row {
+          margin-top: 1rem;
+          color: $bgColor;
+          font-weight: bold;
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}

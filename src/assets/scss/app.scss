@@ -1,0 +1,188 @@
+@import 'components/navbar';
+@import 'components/map';
+@import 'components/listdata';
+@import 'views/login';
+@import 'views/home';
+@import 'views/history';
+@import 'views/travel';
+
+$background: #262626;
+$highlight_bg: #1c1c1c;
+$base_text: #969696;
+$navbar_bg: #2e2f2f;
+$highlight_color: #ffa12d;
+$button_bg: #343434;
+$button_color: #cfcfcf;
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  background-color: $background;
+  color: $base_text;
+  font-family: Roboto;
+}
+
+.navbar {
+  background: $navbar_bg;
+  text-align: center;
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+
+  .nav-container {
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding-top: 1rem;
+
+      .logo-text {
+        margin-left: 15px;
+        letter-spacing: 1px;
+
+        .highlight {
+          color: $highlight_color;
+        }
+      }
+    }
+  }
+}
+
+/* Estilos del login  */
+.container {
+  /*  flex: 1; */
+  grid-column: 2 / 3;
+
+  .middle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+
+    .middle {
+      width: 600px;
+      padding: 3em;
+      border: none;
+
+      .card-title {
+        color: white;
+        margin-bottom: 2rem;
+        font-size: 1.5em;
+        letter-spacing: 1px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      label,
+      span {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .card {
+        background-color: $highlight_bg;
+        padding: 25px 20px;
+        color: white;
+        /*    border-radius: 7px; */
+        border: none;
+
+        .card-actions {
+          margin-top: 15px;
+          display: flex;
+          justify-content: right;
+          flex-direction: row;
+        }
+      }
+    }
+  }
+
+  .button {
+    border: none;
+    background: $button_bg;
+    color: $button_color;
+    padding: 6px 12px;
+    /* border-radius: 3px; */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .form-group {
+      label {
+        margin-bottom: 15px;
+        position: relative;
+        color: $base_text;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px 0px;
+        margin-top: 20px;
+        border: none;
+        outline: none;
+        background-color: $highlight_bg;
+        border-bottom: 1px solid $base_text;
+        color: white;
+      }
+
+      input::placeholder {
+        opacity: 0;
+      }
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(0px);
+        font-size: 0.825em;
+        transition-duration: 300ms;
+      }
+
+      label:focus-within>span,
+      input:not(:placeholder-shown)+span {
+        transform: translateY(-20px);
+        color: white;
+      }
+    }
+  }
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+
+.mr-2 {
+  margin-right: .5rem;
+}
+
+.mb-2 {
+  margin-bottom: .5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.strong {
+  font-weight: bold;
+}

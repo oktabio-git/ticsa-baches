@@ -1,0 +1,198 @@
+%flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+%flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.container_travel {
+  display: grid;
+  padding: 2em;
+  row-gap: 1em;
+  grid-column: 2 / 3;
+}
+
+/* Componente cargar video */
+.row {
+  @extend %flexRow;
+  @include ItemContent(center, center);
+}
+
+.upload {
+  color: #ffa12d;
+  font-size: 10rem;
+}
+
+.rowOne {
+  @include ItemContent(center, center);
+  width: 60%;
+  display: flex;
+  border-style: dashed;
+  border-color: #ffa12d;
+  text-decoration-color: #ffa12d;
+  padding: 2em;
+  cursor: pointer;
+}
+
+.icon_text {
+  display: flex;
+  @include ItemContent(center, center);
+  flex-direction: column;
+}
+
+.icon_text,
+p {
+  color: $colorBlanco;
+}
+
+/* ---------------------------------------------------------------------------------------- */
+/* Lista de recorrido fila dos*/
+.container-listRecorridos {
+  @extend %flexRow;
+  @include ItemContent(center, space-between);
+}
+
+.car-search {
+  display: flex;
+  @include ItemContent(center, none);
+  color: aliceblue;
+}
+
+.car-search,
+h2 {
+  font-weight: normal;
+}
+
+.car {
+  font-size: 1.5em;
+  margin-left: 2px;
+  margin-right: 1rem;
+}
+
+.search {
+  display: flex;
+  @include ItemContent(center, center);
+}
+
+/* Consulta de datos */
+.wrapper-data {
+  background-color: #101414;
+  padding: 2rem;
+}
+
+.container-consulta {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container-label {
+  margin-top: 1.2em;
+}
+
+.label {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  @include ItemContent(center, none);
+  @include backgroundHW(#101414, auto, 80%);
+  color: $colorBlanco;
+  font-size: 1.1rem;
+}
+
+.opacity,
+label {
+  opacity: 0.7;
+  font-size: 1.2rem;
+}
+
+/*Datos consultado*/
+.label-data {
+  margin-top: 2em;
+  margin-right: 2.3rem;
+  width: 100%;
+  display: flex;
+  @include ItemContent(none, space-between);
+  color: $colorBlanco;
+}
+
+.btn-ver {
+  color: $colorBlanco;
+  @include backgroundHW(#343434, 2rem, 10rem);
+  border: none;
+  font-size: 1rem;
+}
+
+.remove,
+.update {
+  color: #ffa12d;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.ml-3 {
+  margin-left: .75rem;
+}
+
+.form-group.travel input {
+  width: 25rem;
+  padding: .5rem;
+  margin-bottom: .25rem;
+  border-radius: 4px;
+}
+
+.error-message {
+  margin-left: .75rem;
+}
+
+.left {
+  float: left;
+}
+
+.submit {
+  text-align: center;
+
+  button {
+    color: #262626;
+    background: #ffa12d;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 4px;
+    text-transform: uppercase;
+    &:disabled {
+      color: #fff;
+      background-color: #6c757d;
+      border-color: #6c757d;
+      cursor: default;
+    }
+    &:hover:enabled {
+      background: #fdb052;
+    }
+  }
+}
+
+input:focus {
+  color: #000;
+}
+
+.pl-2 {
+  padding-left: .5rem;
+}
+
+.pr-2 {
+  padding-right: .5rem;
+}
