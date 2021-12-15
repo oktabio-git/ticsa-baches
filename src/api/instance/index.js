@@ -18,13 +18,14 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(config => {
+  const exception = "https://maps.googleapis.com/maps/api/geocode/json?latlng=44.4647452,7.3553838&key=AIzaSyDS8ucvBw36czfxSFiK7dY1y2YQDNNkImw";
   const endpoint = config.url.replace(config.baseURL, '');
   const foundAuth = authHeaderBlackList.find(element => config.url.includes(element));
   const found = loaderBlackList.find(element => endpoint.includes(element));
 
   if (!foundAuth) {
     const token = store.getters.getLoginTokens;
-    if (token) {
+    if (token && (endpoint != exception)) {
       config.headers.Authorization = 'Bearer ' + token;
     }
   }
