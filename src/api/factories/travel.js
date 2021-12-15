@@ -27,6 +27,11 @@ export default axios => ({
     return axios.get(`${AUTH_URL}image/data`);
   },
   getAddressData() {
-    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=44.4647452,7.3553838&key=AIzaSyDS8ucvBw36czfxSFiK7dY1y2YQDNNkImw')
+    var config = {
+      method: 'get',
+      url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=44.4647452,7.3553838&key=AIzaSyDS8ucvBw36czfxSFiK7dY1y2YQDNNkImw', //the rest of your url
+      secure: false //important
+    };
+    return axios(config)
   }
 });
