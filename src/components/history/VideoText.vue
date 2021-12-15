@@ -1,7 +1,7 @@
 <template>
   <div class="video-text">
     <h3>{{ titleVideo }}</h3>
-    <video src="../../assets/video.mp4" controls>
+    <video src="https://www.youtube.com/watch?v=nhBVL41-_Cw" controls>
       <source type="video/mp4" />
     </video>
   </div>

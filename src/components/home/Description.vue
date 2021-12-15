@@ -13,7 +13,7 @@
       <video
         claas="video"
         width="320"
-        src="../../assets/video.mp4"
+        src="https://www.youtube.com/watch?v=nhBVL41-_Cw"
         height="240"
         controls>
         <source type="video/mp4" />
