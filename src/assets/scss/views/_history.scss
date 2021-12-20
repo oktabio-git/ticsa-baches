@@ -78,7 +78,7 @@ $bgColor: #fff;
 
 /* Galerias de fotos ver mas*/
 .imagen {
-  @include maquetado(82vw, auto, flex, row);
+  @include maquetado(98.8%, auto, flex, row);
   margin-left: 1rem;
   margin-bottom: 1rem;
   overflow-x: auto;
@@ -198,13 +198,6 @@ $bgColor: #fff;
       background-color: #ffa12d;
       border: none;
       margin-right: 1rem;
-    }
-
-    .line-ruta {
-      height: 1.1rem;
-      border-left: 2px solid #fff;
-      margin-left: 1.4rem;
-      opacity: 0.4;
     }
 
     .circle-direccion {

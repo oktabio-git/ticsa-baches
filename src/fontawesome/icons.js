@@ -3,9 +3,10 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 
 const fasIcons = [
-  fas.faSearchPlus,
+  fas.faSyncAlt,
   fas.faCloudUploadAlt,
   fas.faArrowAltCircleDown,
+  fas.faCheckCircle,
 ]
 
 export default function registerIconsFA() {

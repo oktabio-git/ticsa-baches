@@ -7,7 +7,9 @@
           <p class="date">{{ dateFormat(fecha) }}</p>
         </div>
         <div class="data-button">
-          <button>{{ textButton.text }}</button>
+          <button class="pointer" @click="redirectTo(idParam, title)">
+            {{ textButton.text }}
+          </button>
         </div>
       </div>
       <video
@@ -15,7 +17,8 @@
         width="320"
         src="https://www.youtube.com/watch?v=nhBVL41-_Cw"
         height="240"
-        controls>
+        controls
+      >
         <source type="video/mp4" />
       </video>
     </div>
@@ -25,6 +28,10 @@
 <script>
 export default {
   props: {
+    idParam: {
+      type: Number,
+      require: true,
+    },
     title: {
       type: String,
       require: true,
@@ -37,16 +44,19 @@ export default {
   },
   methods: {
     dateFormat(data) {
-      const date = new Date(data)
-      let d = date.getUTCDate()
-      let m = date.getUTCMonth() + 1
-      let y = date.getUTCFullYear()
+      const date = new Date(data);
+      let d = date.getUTCDate();
+      let m = date.getUTCMonth() + 1;
+      let y = date.getUTCFullYear();
       if (m < 10) {
-        return `${d}/0${m}/${y}`
+        return `${d}/0${m}/${y}`;
       } else {
-        return `${d}/${m}/${y}`
+        return `${d}/${m}/${y}`;
       }
     },
+    redirectTo(id, title) {
+      this.$router.push(`/history/${id}?title=${title}`);
+    },
   },
-}
+};
 </script>

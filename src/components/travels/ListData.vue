@@ -6,11 +6,21 @@
       <div class="pl-2 pr-2">{{ travel }}</div>
       <div class="pl-2">{{ convertSize(size) + " MB" }}</div>
       <div class="analysis-video center" @click="getMetaVideo(ruteId)">
-        <font-awesome-icon :icon="['fa', 'search-plus']" fixed-width />
+        <font-awesome-icon
+          v-if="!processed"
+          :icon="['fa', 'sync-alt']"
+          fixed-width
+        />
+        <font-awesome-icon
+          :class="{ done: processed }"
+          v-if="processed"
+          :icon="['fa', 'check-circle']"
+          fixed-width
+        />
       </div>
     </div>
     <div>
-      <button class="btn-ver">Ver recorrido</button>
+      <button class="btn-ver" @click="toTravelRoute()" :class="{ active: processed}">Ver recorrido</button>
     </div>
     <div><i class="remove far fa-trash-alt"></i></div>
   </div>
@@ -43,6 +53,11 @@ export default {
       required: true,
       default: 0,
     },
+    processed: {
+      type: Boolean,
+      require: true,
+      default: false,
+    },
   },
   methods: {
     dateFormat(data) {
@@ -61,10 +76,16 @@ export default {
       return (sz / 1024 / 1024).toFixed(2);
     },
     getMetaVideo(data) {
-      this.$api.travel.getMetaVideo(data).then(() => {
-      }).catch(err => {
-        console.log(err);
-      })
+      this.$api.travel
+        .getMetaVideo(data)
+        .then(() => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    toTravelRoute() {
+      if (this.processed)
+        this.$router.push(`/history/${this.ruteId}`)
     }
   },
 };

@@ -3,7 +3,7 @@ import { publicRoutes } from '../shared/constants';
 
 const refreshAccessToken = payload => this.$api.auth.refreshToken(payload)
 
-const logOut = () => {
+const logout = () => {
   store.dispatch('updateLoginTokens');
   window.location.href = window.location.href.replace(window.location.pathname, "/login");
   return;
@@ -21,6 +21,6 @@ const authGuard = (to, from, next) => {
 
 export {
   refreshAccessToken,
-  logOut,
+  logout,
   authGuard,
 }

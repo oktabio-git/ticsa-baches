@@ -123,7 +123,18 @@ label {
   color: $colorBlanco;
   @include backgroundHW(#343434, 2rem, 10rem);
   border: none;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  &.active {
+    cursor: pointer;
+    color: #262626;
+    background: #ffa12d;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    &:hover {
+      background: #fdb052;
+    }
+  }
 }
 
 .remove,

@@ -24,26 +24,23 @@
 
     <div class="row">
       <div class="col">
-        <div
-          class="form-group travel"
-          :class="{ error: $v.travel.name.$error }"
-        >
+        <div class="form-group travel" :class="{ error: $v.form.name.$error }">
           <input
-            v-model="$v.travel.name.$model"
+            v-model="$v.form.name.$model"
             type="text"
             class="form-control"
             placeholder="Recorrido del video"
-            @blur="$v.travel.name.$touch()"
+            @blur="$v.form.name.$touch()"
           />
         </div>
         <span
-          v-if="!$v.travel.name.required && $v.travel.name.$error"
+          v-if="!$v.form.name.required && $v.form.name.$error"
           class="error-message"
         >
           El recorrido es requisito
         </span>
         <div class="submit mt-4">
-          <button :disabled="!isFormDataValid" @click="onUploadFile()">
+          <button @click="onUploadFile()">
             Subir video
           </button>
         </div>
@@ -84,6 +81,7 @@
           :videoName="row.videoFile"
           :travel="row.rute"
           :size="row.size"
+          :processed="row.isProcessed"
         ></ListData>
       </div>
     </div>
@@ -113,16 +111,17 @@ export default {
       selectedFile: null,
       selectedImgFile: null,
       videoData: [],
-      travel: {
+      form: {
         name: "",
       },
+      isValid: false,
     };
   },
   created() {
     this.getVideoData();
   },
   validations: {
-    travel: {
+    form: {
       name: {
         required,
       },
@@ -135,10 +134,10 @@ export default {
       if (this.selectedFile) this.loadMessage = this.selectedFile.name;
     },
     onUploadFile() {
-      if (this.isFormDataValid) {
+      if (this.isFormDataValid()) {
         const formData = new FormData();
         formData.append("file", this.selectedFile);
-        formData.append("rute", this.travel.name);
+        formData.append("rute", this.form.name);
         this.$api.travel
           .uploadVideoData(formData)
           .then((res) => {
@@ -153,7 +152,7 @@ export default {
       this.$api.travel
         .getVideoData()
         .then((res) => {
-          this.videoData = res.data.rows.recordset;
+          this.videoData = res.data.travels;
         })
         .catch((err) => {
           console.log(err);
@@ -166,13 +165,13 @@ export default {
     onUploadImgFile() {
       const formData = new FormData();
       formData.append("imgFile", this.selectedImgFile);
-      this.$api.travel.getMetaData(formData).then(() => {
-      }).catch(err => {
-        console.log(err);
-      })
-    }
-  },
-  computed: {
+      this.$api.travel
+        .getMetaData(formData)
+        .then(() => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     isFormDataValid() {
       this.$v.$reset();
       this.$v.$touch();

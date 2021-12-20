@@ -24,7 +24,7 @@ export default {
     },
     showLoader() {
       return this.getLoadCount() > 0 ? true : false;
-    }
-  }
+    },
+  },
 };
 </script>

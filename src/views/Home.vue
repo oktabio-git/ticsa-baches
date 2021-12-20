@@ -45,6 +45,7 @@
           <Description
             v-for="row in videosLoaded"
             :key="row.id"
+            :idParam="+row.id"
             :title="row.rute"
             :fecha="row.date"
             :textButton="textButton"
@@ -161,7 +162,7 @@ export default {
       this.$api.travel
         .getVideoData()
         .then((res) => {
-          this.videoData = res.data.rows.recordset;
+          this.videoData = res.data.travels;
         })
         .catch((err) => {
           console.log(err);

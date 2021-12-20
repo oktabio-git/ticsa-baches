@@ -8,5 +8,5 @@ export default axios => ({
   },
   refreshToken(payload) {
     return axios.post(AUTH_URL + 'auth/refresh_token', payload);
-  },
+  }
 });

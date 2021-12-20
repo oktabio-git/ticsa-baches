@@ -8,23 +8,22 @@
         >
       </div>
     </div>
-    <div class="menu">
+    <div class="menu" v-if="isLogged">
       <div class="menu1">
         <router-link class="link" to="/home">Inicio</router-link>
         <router-link class="link" to="/travel">Recorridos</router-link>
-        <router-link class="link" to="/history">Historicos</router-link>
       </div>
       <div class="menu2">
-        <router-link class="link" to="/login">Mi perfil</router-link>
-        <router-link class="link" to="/config"
-          >Configuracion</router-link
-        >
+        <class class="link" @click="signOut()">Cerrar Sesión</class>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { logout } from "@/helpers/auth";
+
 export default {
   name: "Navbar",
   data() {
@@ -33,5 +32,16 @@ export default {
       titleApp1: "Road",
     };
   },
+  methods: {
+    ...mapGetters(["getIsLogged"]),
+    signOut() {
+      logout();
+    }
+  },
+  computed: {
+    isLogged() {
+      return this.getIsLogged();
+    },
+  }
 };
 </script>

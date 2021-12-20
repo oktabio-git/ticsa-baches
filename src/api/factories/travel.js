@@ -26,7 +26,10 @@ export default axios => ({
   getImageData() {
     return axios.get(`${AUTH_URL}image/data`);
   },
-  getAddressData() {
-    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=44.4647452,7.3553838&key=AIzaSyDS8ucvBw36czfxSFiK7dY1y2YQDNNkImw')
+  getAddressData(lat, lng) {
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDS8ucvBw36czfxSFiK7dY1y2YQDNNkImw`)
+  },
+  getImageTravelData(id) {
+    return axios.get(`${AUTH_URL}image/travel_data?id=${id}`);
   }
 });

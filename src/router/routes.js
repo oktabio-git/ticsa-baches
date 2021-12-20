@@ -31,7 +31,7 @@ export default [
     component: loadView('Travel')
   },
   {
-    path: '/history',
+    path: '/history/:id',
     name: 'History',
     beforeEnter: authGuard,
     component: loadView('History')

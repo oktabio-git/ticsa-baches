@@ -20,8 +20,13 @@
       </div>
     </div>
     <div class="ruta-mapa">
-      <RutaFechaHora :ciudad="ciudad" :date="date"> </RutaFechaHora>
-
+      <RutaFechaHora
+        v-if="addressData.length != 0"
+        :ciudad="location.toUpperCase()"
+        :date="addressData[0].date"
+        :addresses="addressData"
+      >
+      </RutaFechaHora>
       <div class="mapa">
         <h3>{{ "Mapa de recorrido".toUpperCase() }}</h3>
         <Map :dataImages="dataImages"></Map>
@@ -29,7 +34,6 @@
     </div>
     <div class="galeria">
       <IconText :text="text"></IconText>
-
       <Gallery
         :titleCiudad="titleCiudad"
         :verMas="verMas"
@@ -75,8 +79,6 @@ export default {
       grande: "Grande",
       grandeNumber: 67,
       titleVideo: "Video Recorrido".toUpperCase(),
-      ciudad: "San Jerónimo".toUpperCase(),
-      date: new Date(),
       titleCiudad: "248 Oscar Wilde",
       verMas: "Ver Mas",
       text: "",
@@ -88,17 +90,28 @@ export default {
         analythicSizes: [],
         analythicTypes: [],
       },
+      addressData: [],
     };
+  },
+  props: {
+    id: {
+      type: Number,
+      require: true
+    },
+    location: {
+      type: String,
+      require: true,
+      default: "Ubicación"
+    }
   },
   created() {
     this.getDataImages();
     this.getAnalythicData();
-    this.testAddressData();
   },
   methods: {
     getAnalythicData() {
       this.$api.analythic
-        .getAnalythicData()
+        .getAnalythicTravel(this.id)
         .then((res) => {
           this.analythics.analythicTypes = res.data.types;
           this.analythics.analythicSizes = res.data.sizes;
@@ -109,19 +122,31 @@ export default {
     },
     getDataImages() {
       this.$api.travel
-        .getImageData()
+        .getImageTravelData(this.id)
         .then((res) => {
           this.dataImages = res.data.rows.recordset;
+          if (this.dataImages != 0) {
+            this.dataImages.forEach((element) => {
+              this.getAddressData(
+                element.latitud,
+                element.length,
+                element.timeCapture
+              );
+            });
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    testAddressData() {
+    getAddressData(lat, lng, date) {
       this.$api.travel
-        .getAddressData()
+        .getAddressData(lat, lng)
         .then((res) => {
-          console.log(res);
+          this.addressData.push({
+            address: res.data.results[0].formatted_address,
+            date: date,
+          });
         })
         .catch((err) => {
           console.log(err);

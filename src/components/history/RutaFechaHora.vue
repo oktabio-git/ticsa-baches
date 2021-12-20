@@ -1,33 +1,14 @@
 <template>
   <div class="container-ruta-fecha-Hora">
     <h3>{{ ciudad }}</h3>
-    <p>{{ date }}</p>
+    <p>{{ getDateFormat(date) }}</p>
     <DibujaRuta
-      :hora="hora"
-      :minutes="minutes"
-      :direccion="direccion"
+      v-for="(address, index) in addresses"
+      :key="index"
+      :date="address.date"
+      :address="address.address"
     ></DibujaRuta>
-    <DibujaRuta
-      :hora="hora"
-      :minutes="minutes"
-      :direccion="direccion"
-    ></DibujaRuta
-    ><DibujaRuta
-      :hora="hora"
-      :minutes="minutes"
-      :direccion="direccion"
-    ></DibujaRuta>
-    <DibujaRuta
-      :hora="hora"
-      :minutes="minutes"
-      :direccion="direccion"
-    ></DibujaRuta>
-    <DibujaRuta
-      :hora="hora"
-      :minutes="minutes"
-      :direccion="direccion"
-    ></DibujaRuta>
-    <FinRuta :hora="hora" :minutes="minutes" :fin="fin"></FinRuta>
+    <FinRuta :time="getLastTime(addresses)"></FinRuta>
   </div>
 </template>
 
@@ -46,18 +27,36 @@ export default {
       default: "Información General",
     },
     date: {
-      type: Date,
+      type: String,
       required: true,
-      default: new Date(),
+      default: "2021-12-10T00:00:00.000Z",
+    },
+    addresses: {
+      type: Array,
+      require: true,
     },
   },
-  data() {
-    return {
-      hora: new Date().getHours(),
-      minutes: new Date().getMinutes(),
-      direccion: "Oscar Wilde 173 San Jerónimo, Nuevo León",
-      fin: "Fin de recorrido",
-    };
+  methods: {
+    getLastTime(data) {
+      const temp = data[data.length - 1].date;
+      const date = temp.substring(0, temp.length - 1);
+      const dateFormat = new Date(date);
+      const hours = dateFormat.getHours();
+      const minutes = dateFormat.getMinutes();
+      return `${("0" + hours).slice(-2)}:${("0" + minutes).slice(-2)}`;
+    },
+    getDateFormat(data) {
+      const temp = data.substring(0, data.length - 1);
+      const date = new Date(temp);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      if (month < 10) {
+        return `${day}/0${month}/${year}`;
+      } else {
+        return `${day}/${month}/${year}`;
+      }
+    },
   },
 };
 </script>
